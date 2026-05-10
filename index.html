@@ -66,7 +66,7 @@
         .section-title {
             text-align: center;
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             color: var(--text-dark);
             text-shadow: 0 2px 4px rgba(255,255,255,0.5);
         }
@@ -153,7 +153,7 @@
         /* --- 2. MEMORY GALLERY --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -190,17 +190,28 @@
 
         .gallery-item:hover .gallery-caption { opacity: 1; }
 
-        /* --- 3. LETTER TO MOTHER --- */
+        /* --- 3. LETTERS FROM SIBLINGS --- */
+        .letters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
         .letter-container {
-            max-width: 800px;
-            margin: 0 auto;
             background: #FFFAF0; /* Paper color */
-            padding: 4rem;
+            padding: 3rem 2rem;
             border-radius: 10px;
             box-shadow: 2px 4px 15px rgba(0,0,0,0.05), inset 0 0 50px rgba(0,0,0,0.02);
             position: relative;
+            transition: transform 0.3s ease;
         }
         
+        .letter-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 8px 25px rgba(0,0,0,0.08), inset 0 0 50px rgba(0,0,0,0.02);
+        }
+
         .letter-container::before {
             content: '';
             position: absolute;
@@ -212,86 +223,22 @@
 
         .letter-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 1.6rem;
             line-height: 1.8;
             color: #333;
             position: relative;
             z-index: 1;
         }
 
-        /* --- 4. JOURNEY TIMELINE --- */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 4rem auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background: var(--glass-border);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .timeline-item.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: white;
-            border: 4px solid #f2b5c4;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .left { left: 0; }
-        .right { left: 50%; }
-        .right::after { left: -10px; }
-
-        .timeline-content {
-            padding: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .timeline-content img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-date {
-            font-size: 0.9rem;
+        .letter-signature {
+            margin-top: 1.5rem;
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.8rem;
             color: #d68798;
-            font-weight: 600;
-            margin-bottom: 5px;
         }
 
-        /* --- 5. REASONS WHY --- */
+        /* --- 4. REASONS WHY --- */
         .reasons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -315,7 +262,7 @@
             margin-bottom: 1rem;
         }
 
-        /* --- 6. SURPRISE ENDING --- */
+        /* --- 5. SURPRISE ENDING --- */
         #ending {
             text-align: center;
             min-height: 80vh;
@@ -355,12 +302,8 @@
 
         /* Responsive */
         @media screen and (max-width: 768px) {
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item::after { left: 21px; }
-            .right { left: 0%; }
-            .letter-container { padding: 2rem; }
-            .letter-text { font-size: 1.5rem; }
+            .letter-container { padding: 2rem 1.5rem; }
+            .letter-text { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -371,9 +314,9 @@
         <i class="fas fa-music"></i>
         <span>Our Song</span>
         <i class="fas fa-play" id="play-pause-btn"></i>
-        <!-- PLACEHOLDER: Replace src with your audio file link -->
+        <!-- IMPORTANT: Ensure your downloaded song is in the same folder and named 'our-song.mp3' -->
         <audio id="bg-music" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            <source src="our-song.mp3" type="audio/mpeg">
         </audio>
     </div>
 
@@ -381,105 +324,157 @@
     <section id="hero">
         <div id="particles-hero"></div>
         <h1 class="handwritten">Happy Mother’s Day, Mom 💖</h1>
-        <p>To the woman who gave me everything. This is a small tribute to your endless love, your sacrifices, and the beautiful life we share.</p>
+        <p>To the woman who gave us everything. This is a small tribute to your endless love, your sacrifices, and the beautiful life we share.</p>
         <a href="#gallery" class="btn-start">Start the Journey <i class="fas fa-chevron-down"></i></a>
     </section>
 
-    <!-- 2. MEMORY GALLERY -->
+    <!-- 2. MEMORY GALLERY (12 Images) -->
     <section id="gallery" class="reveal">
         <h2 class="section-title">Our Precious Memories</h2>
         <div class="gallery-grid">
-            <!-- PLACEHOLDER: Replace image URLs with your photos -->
+            <!-- Image 1 -->
             <div class="gallery-item glass-card">
-                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=600" alt="Memory">
+                <img src="photo_1.jpeg" alt="Memory">
                 <div class="gallery-caption">Your warm hugs</div>
             </div>
+            <!-- Image 2 -->
             <div class="gallery-item glass-card">
-                <img src="https://images.unsplash.com/photo-1504151932400-72d4384f0e13?auto=format&fit=crop&q=80&w=600" alt="Memory">
-                <div class="gallery-caption">Family Vacations</div>
+                <img src="photo_2.jpeg" alt="Memory">
+                <div class="gallery-caption">Your endless love</div>
             </div>
+            <!-- Image 3 -->
             <div class="gallery-item glass-card">
-                <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?auto=format&fit=crop&q=80&w=600" alt="Memory">
+                <img src="photo_3.jpeg" alt="Memory">
                 <div class="gallery-caption">Laughing together</div>
             </div>
+            <!-- Image 4 -->
             <div class="gallery-item glass-card">
-                <img src="https://images.unsplash.com/photo-1494607239400-ff147da48308?auto=format&fit=crop&q=80&w=600" alt="Memory">
-                <div class="gallery-caption">My graduation day</div>
+                <img src="photo_4.jpeg" alt="Memory">
+                <div class="gallery-caption">Beautiful holidays</div>
+            </div>
+            <!-- Image 5 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_5.jpeg" alt="Memory">
+                <div class="gallery-caption">Forced yet lovely moments</div>
+            </div>
+            <!-- Image 6 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_6.jpeg" alt="Memory">
+                <div class="gallery-caption">Forever a family</div>
+            </div>
+            <!-- Image 7 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_7.jpeg" alt="Memory">
+                <div class="gallery-caption">All the dinners</div>
+            </div>
+            <!-- Image 8 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_8.jpeg" alt="Memory">
+                <div class="gallery-caption">Unforgettable birthdays</div>
+            </div>
+            <!-- Image 9 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_9.jpeg" alt="Memory">
+                <div class="gallery-caption">Fun moments at home</div>
+            </div>
+            <!-- Image 10 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_10.jpeg" alt="Memory">
+                <div class="gallery-caption">Endless support</div>
+            </div>
+            <!-- Image 11 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_11.jpeg" alt="Memory">
+                <div class="gallery-caption">Joyful celebrations</div>
+            </div>
+            <!-- Image 12 -->
+            <div class="gallery-item glass-card">
+                <img src="photo_12.jpeg" alt="Memory">
+                <div class="gallery-caption">A lifetime of love</div>
             </div>
         </div>
     </section>
 
-    <!-- 3. LETTER TO MY MOTHER -->
-    <section id="letter" class="reveal">
-        <h2 class="section-title">A Letter For You</h2>
-        <div class="letter-container">
-            <div class="letter-text">
-                <p>Dearest Mom,</p>
-                <br>
-                <p>Words can never truly capture how much you mean to me. From the very beginning, you have been my guiding light, my safe haven, and my biggest cheerleader.</p>
-                <br>
-                <p>Thank you for the sleepless nights, the endless patience, and the unconditional love you pour into everything you do. You've taught me how to be strong, how to be kind, and how to love deeply.</p>
-                <br>
-                <p>I am who I am today because of you. I hope this small digital space reminds you of how incredibly cherished you are.</p>
-                <br>
-                <p>With all my heart,</p>
-                <p>[Your Name]</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. OUR JOURNEY TIMELINE -->
-    <section id="journey">
-        <h2 class="section-title reveal">Our Journey</h2>
-        <div class="timeline">
+    <!-- 3. LETTERS FROM SIBLINGS -->
+    <section id="letters" class="reveal">
+        <h2 class="section-title">Letters From Us</h2>
+        <div class="letters-grid">
             
-            <!-- Timeline Item 1 -->
-            <div class="timeline-item left reveal-timeline">
-                <div class="timeline-content">
-                    <p class="timeline-date">The Early Years</p>
-                    <h3>Always Holding My Hand</h3>
-                    <!-- PLACEHOLDER: Image link -->
-                    <img src="https://images.unsplash.com/photo-1490127252417-7c393f993ee4?auto=format&fit=crop&q=80&w=600" alt="Early years">
-                    <p>Thank you for teaching me how to take my first steps and never letting go when I stumbled.</p>
+            <!-- Sibling 1 -->
+            <div class="letter-container">
+                <div class="letter-text">
+                    <p>Dear Mom,</p>
+                    <br>
+                    <p>Happy Mothers day mom!!
+
+Since I’m at university now, I wanted to send a little note to say how much I love you and how lucky I feel to have you as my mom. You’ve done so much for me over the years, and I don't think I could ever thank you enough for the constant support and the home you’ve built for us.
+
+I love that you're always ready to fight for us, and you always push us to be better. I know that if I ever need anything, you'll always be there, and thank you for that, its genuinely amazing. Thanks for always pushing me to do things even tho I wouldn’t want to do them like guitar or gym which ultimately helped me only. 
+I like how you're always forcing me to eat food out of love and care, and no matter how tired you are, you always insist on preparing fresh food for me. Even though i may protest against it and get annoyed, i really really appreciate how much you love me and care for me, so thank you for that. 
+you’re amazing, stop underestimating yourself, and dont be hesitant to try new things (like the food business you always keep thinking about)
+i like how you've restarted gym now, thats wonderful, its nice that you're working on your hobbies
+love you and happy mothers Day! ❤️</p>
+                    <div class="letter-signature">Love, Krsna</div>
                 </div>
             </div>
 
-            <!-- Timeline Item 2 -->
-            <div class="timeline-item right reveal-timeline">
-                <div class="timeline-content">
-                    <p class="timeline-date">School Days</p>
-                    <h3>My Biggest Fan</h3>
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600" alt="School">
-                    <p>From making my lunches to cheering the loudest at my school events, you made childhood magical.</p>
+            <!-- Sibling 2 -->
+            <div class="letter-container">
+                <div class="letter-text">
+                    <p>Dearest Mom,</p>
+                    <br>
+                    <p>Happy Mother's day to the most gorgeous and strong woman
+I just wanted to tell you that I love you
+You've done so much for everyone
+For all yours friends, all yours cousins and most importantly for dad, Krsna, Mahavir and me.
+Everything that you do means so much to me
+It truly means the world
+You've taken care of us in ways that words can't describe
+But your actions do
+Even when you need rest, you make sure to ready a plate full of food for us because you know we will be tired after school regardless of the fact that you are tired too because of sooo much work you do and manage the entire house
+You have build this new house piece by piece, bit by bit, every detail taken care of, by you.
+You have taken care of majority of the work of this house and because of you it's starting to look like a home
+And in this home
+There's us who you have built piece by piece too
+Every trait we have, every talent we are passionate about and every word of wisdom we say are instilled in us
+We are who we are thanks to you and dad
+So I think it's time you do what u want to do
+It's never too late to follow your dreams
+Plus that's what a year of watching Anupama during lockdown taught us, right?
+So i hope this mother's day inspires you to do things you want to achieve and look after your mental and physical health 
+Hit the gym, go to badminton classes, learn new dance forms like hip hop and garba, go swimming on sunny days, drink tea and eat bhajias in peace on rainy days, learn how to invest in stock market, do everything you can because it's truly now or never. Nothing is impossible and I hope this day is a reminder of how powerful mothers are. They are completely unstoppable. At the end of day no matter what, I know that I will always have u by my side whenever I'm in need of support and I'm more than grateful to be able to depend on someone this way. I know you'd fight with anyone just for me if that's what it comes to. I know that every attribute I have is thanks to your upbringing and I love who I've become all because of you. Thank you so much for being the shoulder I know i can always lean on. 
+
+Fav memories: listening to music together, making you hear my drums, hitting the gym together, dancing together, watching tv shows together, rewatching movies like kabhi Khushi kabhi gham late at night together</p>
+                    <div class="letter-signature">Love, Freya</div>
                 </div>
             </div>
 
-            <!-- Timeline Item 3 -->
-            <div class="timeline-item left reveal-timeline">
-                <div class="timeline-content">
-                    <p class="timeline-date">Growing Up</p>
-                    <h3>My Best Friend</h3>
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=600" alt="Best Friend">
-                    <p>As I grew older, you transitioned from just being my mother to being my most trusted confidant.</p>
+            <!-- Sibling 3 -->
+            <div class="letter-container">
+                <div class="letter-text">
+                    <p>Mom,</p>
+                    <br>
+                    <p>You are the heart and soul of our family. Thank you for holding us all together and giving us a life filled with joy, laughter, and so much warmth. You mean the world to me.</p>
+                    <div class="letter-signature">Love, Mahavir</div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- 5. REASONS WHY -->
+    <!-- 4. REASONS WHY -->
     <section id="reasons" class="reveal">
         <h2 class="section-title">Reasons You're The Best</h2>
         <div class="reasons-grid">
             <div class="glass-card reason-card">
                 <i class="fas fa-heart reason-icon"></i>
                 <h3>Your Endless Love</h3>
-                <p>No matter what happens, your love has always been my constant anchor.</p>
+                <p>No matter what happens, your love has always been our constant anchor.</p>
             </div>
             <div class="glass-card reason-card">
                 <i class="fas fa-star reason-icon"></i>
                 <h3>Your Wisdom</h3>
-                <p>Your advice is always exactly what I need to hear, even when I don't realize it.</p>
+                <p>Your advice is always exactly what we need to hear, even when we don't realize it.</p>
             </div>
             <div class="glass-card reason-card">
                 <i class="fas fa-utensils reason-icon"></i>
@@ -489,16 +484,16 @@
             <div class="glass-card reason-card">
                 <i class="fas fa-sun reason-icon"></i>
                 <h3>Your Smile</h3>
-                <p>Seeing you happy lights up my entire world.</p>
+                <p>Seeing you happy lights up our entire world.</p>
             </div>
         </div>
     </section>
 
-    <!-- 6. SURPRISE ENDING -->
+    <!-- 5. SURPRISE ENDING -->
     <section id="ending" class="reveal">
         <div id="particles-ending"></div>
         <p class="ending-text">
-            “Thank you for every sacrifice, every hug, every lesson, and every moment of love. I love you forever.”
+            “Thank you for every sacrifice, every hug, every lesson, and every moment of love. We love you forever.”
         </p>
         <h1 class="handwritten ending-love">Happy Mother's Day</h1>
     </section>
@@ -525,24 +520,14 @@
 
         // 2. Scroll Reveal Animations
         const revealElements = document.querySelectorAll('.reveal');
-        const timelineElements = document.querySelectorAll('.reveal-timeline');
 
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
             
-            // Standard reveals
             revealElements.forEach(el => {
                 const elementTop = el.getBoundingClientRect().top;
                 if (elementTop < windowHeight - 100) {
                     el.classList.add('active');
-                }
-            });
-
-            // Timeline reveals
-            timelineElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) {
-                    el.classList.add('show');
                 }
             });
         };
